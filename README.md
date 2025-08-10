@@ -11,7 +11,7 @@ This codebase provides a complete pipeline for:
 - **Model Training**: Training personalized and population-based glucose prediction models
 - **Cross-Validation**: Leave-one-participant-out (LOPOCV) and personalized 50/50 split validation strategies
 
-See the [methods section](https://www.nature.com/articles/s41746-021-00465-w#Sec8) for additional information on rationale for design choices. 
+See the [methods section](https://www.nature.com/articles/s41746-021-00465-w#Sec8) of the original paper for additional information on rationale for design choices. 
 
 ## Project Structure
 
@@ -140,14 +140,6 @@ python -m src.models.train_population_xgb --config configs/model_loocv.yaml
 python -m src.models.train_personalized_xgb --config configs/model_personalized.yaml
 ```
 
-### 3. Jupyter Notebooks
-
-Explore the data and models using the provided notebooks:
-
-```bash
-jupyter notebook notebooks/
-```
-
 ## Key Components
 
 ### Feature Engineering
@@ -191,6 +183,22 @@ out/
     └── feature_importances/        # Feature importance rankings
 ```
 
+## Results
+Using data directly downloaded from [PhysioNet](https://physionet.org/content/big-ideas-glycemic-wearable/1.1.2/)
+And the defaults and configs currently in this repository (as of 8/10/25):
+
+##### Results for Population LOOCV model
+Mean RMSE: 22.973 ± 4.767
+Mean MAPE: 15.58% ± 4.17%
+Mean Accuracy: 84.42% ± 4.17%
+
+##### Results for Personalized model
+Mean RMSE: 22.286 ± 4.448
+Mean MAPE: 14.07% ± 2.75%
+Mean ACC : 85.93% ± 2.75%
+
+Note: small discrepancies from paper exist due to minor changes mentioned above.
+
 ## Troubleshooting
 
 ### Common Issues
@@ -199,11 +207,6 @@ out/
 2. **Missing Data**: Ensure all required sensor files are present for each participant
 3. **Path Errors**: Verify all paths in configuration files are correct and accessible
 
-### Performance Tips
-
-- Use Polars engine for large datasets
-- Adjust `polars_threads` in config for optimal CPU utilization
-- Monitor memory usage during processing
 
 ## Contributing
 
@@ -215,7 +218,8 @@ out/
 
 ## License
 
-[Add your license information here]
+[MIT](https://opensource.org/license/mit)
+
 
 ## Citation
 
@@ -225,4 +229,4 @@ Bent, B., Cho, P.J., Henriquez, M. et al. Engineering digital biomarkers of inte
 
 ## Issues
 
-Please submit an issue! This was refactored ~5 years after the original paper code was written, so there may be minor discrepancies.
+Please submit an issue! This was refactored ~5 years after the original paper code was written, so there may be minor discrepancies. Support the open source nature of this code - if you fix something, submit a PR and help everyone out :)
