@@ -1,0 +1,25 @@
+paths:
+  root: "/Users/bmb47/Documents/Research/code/glucose-prediction/data"
+  medx_dir: "."              
+  food_logs_dir: "."         
+  out_dir: "/Users/bmb47/Documents/Research/code/glucose-prediction/out"
+  demographics_csv: "Demographics.csv"
+
+
+pipeline:
+  engine: "polars"        # "pandas" or "polars" (polars = fastest)
+  use_bottleneck: true   
+  base_freq: "5min"
+  base_feature_window: "10min"  # rolling stats window for sensors
+  pandas:
+    csv_engine: "pyarrow"  
+    dtype_backend: "pyarrow"
+  polars:
+    threads: null          # null = auto (use all cores)
+  windows:
+    two_hr: "2h"
+    eight_hr: "8h"
+    day_24h: "24h"
+
+participants:
+  ids: ["001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012", "013", "014", "015", "016"]
